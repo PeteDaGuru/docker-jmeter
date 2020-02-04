@@ -5,7 +5,23 @@
 
 Docker image for [Apache JMeter](http://jmeter.apache.org).
 This Docker image can be run as the ``jmeter`` command. 
-Find Images of this repo on [Docker Hub](https://hub.docker.com/r/justb4/jmeter).
+Find Images of the original repo on [Docker Hub](https://hub.docker.com/r/justb4/jmeter).
+
+## Fork by Pete
+
+Modifications by Pete:
+
+Just open CLI if no parameters passed, otherwise passes all parameters to JMeter.
+
+Use `--gui` option to open up GUI via X11.   Requires variables (and XQuartz on Mac OSX):
+```
+docker run --rm --name jmeter-ln -it -v ~/workdir:/workdir -w /workdir \
+ --add-host=host.docker.internal:$(getip.sh) \
+ -v /tmp/.X11-unix:/tmp/.X11-unix -e XAUTHORITY=/tmp/xauth -v ~/.Xauthority:/tmp/xauth -e DISPLAY="host.docker.internal:0.0" \ 
+ PeteDaGuru/jmeter:5.1.1
+```
+
+The rest of this file is pretty much left as it is when I forked the repo.
 
 ## Building
 
